@@ -1,13 +1,14 @@
 import 'dotenv/config';
 import express from 'express';
-import { sendVerificationMail } from './services/mail.service';
 import authRoutes from './routes/auth.route';
+import userRoutes from './routes/user.routes';
 import connectToDB from './config/mongooseConfig';
 
 const app = express();
 app.use(express.json());
 
 app.use('/api', authRoutes);
+app.use('/api', userRoutes);
 
 async function startServer() {
   try {

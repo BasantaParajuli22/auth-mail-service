@@ -7,6 +7,7 @@ export  const userCreateSchema = z.object({
     username: z.string().optional(),
     email: z.string(),
     password: z.string(),
+    wantsEmail: z.boolean().optional(),
     createdAt: z.date().optional(),
     updatedAt: z.date().optional(),
 });

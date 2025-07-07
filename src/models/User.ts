@@ -8,9 +8,19 @@ export interface IUser extends mongoose.Document{
     email: string,
     password: string,
     role: Role,
-    isVerified: boolean,
-    verificationToken?: string;  //optional
+
+    isVerified: boolean,    //email verification
+    verificationToken?: string;  
     verificationTokenExpires?: Date,
+
+    wantsEmails: boolean, //subscribe for emails
+
+    resetPasswordToken?: string,//for password reset
+    resetPasswordExpires?: Date,
+
+    otpCode?: string,//for password reset
+    otpCodeExpires?: Date,
+
     createdAt?:Date,
     updatedAt?:Date,
 }
@@ -37,14 +47,22 @@ const UserSchema = new mongoose.Schema<IUser>({
         enum: RoleEnum.options, 
         default: "reader",
     },
-    isVerified:{
-        type: Boolean,
-        default: false,
-    },
-    
-    verificationToken: {type: String},
 
+    //email verification
+    isVerified:{type: Boolean, default: false,},
+    verificationToken: {type: String},
     verificationTokenExpires: { type: Date },
+
+    //for system updates allow emails?
+    wantsEmails: { type: Boolean, default: true},
+
+    //for password resets
+    resetPasswordToken:{type: String},
+    resetPasswordExpires: { type: Date },
+
+    otpCode:{type: String},
+    otpCodeExpires: { type: Date }
+
 
 }, { timestamps: true });
 
