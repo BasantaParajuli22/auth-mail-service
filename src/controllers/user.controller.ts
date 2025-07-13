@@ -19,6 +19,22 @@ export async function updateEmailPreference(req: Request, res: Response) {
   }
 }
 
+export async function enableTwoFA(req: Request, res: Response) {
+  const { userId } = req.params;
+  const { enableTwoFA = false } = req.body;
+
+  try {
+    const user = await User.findByIdAndUpdate(
+      userId,
+      { enableTwoFA },
+      { new: true }
+    );
+    res.json({ success: true, message: 'Preference updated', user });
+  } catch (err) {
+    res.status(500).json({ success: false, message: 'Error updating preference' });
+  }
+}
+
 //only admin can use this to send email updates to users mail
 export async function sendUpdatesMail(req: Request, res: Response): Promise<void> {
   try {

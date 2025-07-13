@@ -18,6 +18,7 @@ export interface IUser extends mongoose.Document{
     resetPasswordToken?: string,//for password reset
     resetPasswordExpires?: Date,
 
+    enableTwoFA: boolean,
     otpCode?: string,//for password reset
     otpCodeExpires?: Date,
 
@@ -60,6 +61,7 @@ const UserSchema = new mongoose.Schema<IUser>({
     resetPasswordToken:{type: String},
     resetPasswordExpires: { type: Date },
 
+    enableTwoFA:{type: Boolean, default: false,},  
     otpCode:{type: String},
     otpCodeExpires: { type: Date }
 

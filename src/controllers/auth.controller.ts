@@ -119,7 +119,7 @@ export async function verifyOtpCodeAndLogin(req: Request, res: Response): Promis
     try {
         const { otpCode, email } = req.body;
         if (!otpCode || typeof otpCode !== "string") {
-            res.status(400).send({ success: false, message:"Token is required"});
+            res.status(400).send({ success: false, message:"otpCode is required"});
             return;
         } 
         if (!email || typeof email !== "string") {
@@ -253,7 +253,7 @@ export async function resetPassword(req: Request, res: Response): Promise<void> 
             return;
         }
         await mailService.sendPasswordResetConfirmation(user.email);
-        res.status(200).json({ success: true, message: "Email successfully verified!" });
+        res.status(200).json({ success: true, message: "Password has successfully changed!" });
     } catch (error: any) {
          res.status(500).json({ error: error.message });
         return;
